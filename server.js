@@ -18,6 +18,7 @@ app.use(cors());
 
 app.use('/api/devices', require('./api/devices/routes/get_devices'));
 // app.use('/api/devices', require('./api/devices/routes/get_device'));
+app.use('/api/devices', require('./api/devices/routes/update_device'));
 app.use('/api/devices', require('./api/devices/routes/put_device'));
 app.use('/api/users', require('./api/users/routes/get_users'));
 app.use('/api/users', require('./api/users/routes/put_user'));
