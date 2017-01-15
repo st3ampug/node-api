@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../../config');
+const log = require('../../../log/logger');
 var AWS = require("aws-sdk");
 
 AWS.config.update({
@@ -21,12 +22,13 @@ router.route('/')
     docClient.scan(params, onScan);
     function onScan(err, data) {
         if (err) {
-            console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+            //console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+            log.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
             var retData = [];       
             // print all the entries
-            console.log("Devices scan succeeded.");
+            //console.log("Devices scan succeeded.");
             data.Items.forEach(function(device) {
                 retData = retData.concat(device);
             });
@@ -38,8 +40,9 @@ router.route('/')
                 params.ExclusiveStartKey = data.LastEvaluatedKey;
                 docClient.scan(params, onScan);
             }
-
-            res.json(retData);
+            
+            log.info("Devices scan succeeded.");
+            res.status(200).json(retData);
         }
     }
   });
