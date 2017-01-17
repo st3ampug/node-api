@@ -28,9 +28,9 @@ app.use('/api/users', require('./api/users/routes/put_user'));
 // app.use('/api/contacts', require('./api/contacts/routes/put_contact'));
 // app.use('/api/contacts', require('./api/contacts/routes/delete_contact'));
 
-const hostname = 'localhost';
+const hostname = 'localhost'; // this might not be needed
 const port = 3001;
-const server = app.listen(port, hostname, () => {
+const server = app.listen(port, () => {
 
   // mongoose.connect(mongooseUri, dbOptions, (err) => {
   //   if (err) {
