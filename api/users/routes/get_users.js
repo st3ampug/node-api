@@ -32,8 +32,16 @@ router.route('/')
             var retData = [];       
             // print all the entries
             //console.log("Users scan succeeded.");
+            
+            // update gives back everything from the table, and it would include sensitive info
+            // this is why the retData is restricted to contain only necessary info
             data.Items.forEach(function(user) {
-                retData = retData.concat(user);
+                var tmp = {
+                    State: user.State,
+                    Email: user.Email,
+                    Name: user.Name
+                };
+                retData = retData.concat(tmp);
             });
 
             // continue scanning if we have more devices, because
