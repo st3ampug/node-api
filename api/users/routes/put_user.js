@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../../config');
+const log = require('../../../log/logger');
 
 var AWS = require("aws-sdk");
 
@@ -22,10 +23,10 @@ router.route('/')
         console.log("Adding a new item...");
         docClient.put(params, function(err, data) {
             if (err) {
-                console.error("Unable to add item. Error JSON:", JSON.stringify(err, null, 2));
+                log.error(req.connection.remoteAddress + " Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
-                console.log("Added item:", JSON.stringify(data, null, 2));
+                log.info(req.connection.remoteAddress + " Added user:", JSON.stringify(data, null, 2));
                 res.status(200).json(data);
             }
         });

@@ -5,6 +5,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../../config');
+const log = require('../../../log/logger');
 var AWS = require("aws-sdk");
 
 AWS.config.update({
@@ -28,10 +29,10 @@ router.route('/:id')
 
     docClient.get(params, function(err, data) {
         if (err) {
-            console.error("Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            log.error(req.connection.remoteAddress + " Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
-            console.log("GetItem succeeded:", JSON.stringify(data, null, 2));
+            log.info(req.connection.remoteAddress + " GetItem succeeded:", JSON.stringify(data, null, 2));
             res.json(data);
         }
     });

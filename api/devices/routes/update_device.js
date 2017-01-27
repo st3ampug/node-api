@@ -32,11 +32,11 @@ router.route('/')
         docClient.update(params, function(err, data) {
             if (err) {
                 //console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-                log.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                log.error(req.connection.remoteAddress + " Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
                 //log.info("Update succeeded:", JSON.stringify(data, null, 2));
-                log.info("Update succeeded: Device: " + params.Key.Serial + " (" + params.Key.DeviceName + ") >> " + req.body.CurrentLocation);
+                log.info(req.connection.remoteAddress + " Update succeeded: Device: " + params.Key.Serial + " (" + params.Key.DeviceName + ") >> " + req.body.CurrentLocation);
                 res.status(200).json(data);
             }
         });

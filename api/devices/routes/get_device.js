@@ -3,6 +3,7 @@
 const express = require('express');
 const router = express.Router();
 const config = require('../../config');
+const log = require('../../../log/logger');
 var AWS = require("aws-sdk");
 
 AWS.config.update({
@@ -30,11 +31,11 @@ router.route('/:id')
 
       docClient.query(params, function(err, data) {
         if (err) {
-            console.error("Unable to query. Error:", JSON.stringify(err, null, 2));
+            log.error("Unable to query. Error:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
             var retData = [];  
-            console.log("Device query succeeded.");
+            log.info("Device query succeeded.");
             data.Items.forEach(function(device) {
                 retData = retData.concat(device);
             });
