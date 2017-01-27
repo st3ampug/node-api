@@ -26,7 +26,8 @@ router.route('/')
                 log.error(req.connection.remoteAddress + " Unable to add device. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
-                log.info(req.connection.remoteAddress + " Added device:", JSON.stringify(data, null, 2));
+                //log.info(req.connection.remoteAddress + " Added device:", JSON.stringify(data, null, 2));
+                log.info(req.connection.remoteAddress + " Added device: ", params.Item.DeviceName);
                 res.status(200).json(data);
             }
         });

@@ -26,7 +26,7 @@ router.route('/')
                 log.error(req.connection.remoteAddress + " Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
-                log.info(req.connection.remoteAddress + " Added user:", JSON.stringify(data, null, 2));
+                log.info(req.connection.remoteAddress + " Added user: ", params.Item.Name);
                 res.status(200).json(data);
             }
         });
