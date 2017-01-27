@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const config = require('../../config');
 const log = require('../../../log/logger');
+var getIP = require('ipware')().get_ip;
 var AWS = require("aws-sdk");
 
 AWS.config.update({
@@ -21,9 +22,11 @@ router.route('/')
 
     docClient.scan(params, onScan);
     function onScan(err, data) {
+        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        
         if (err) {
             //console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-            log.error(req.connection.remoteAddress + " Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+            log.error(ipinfo + " Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
             var retData = [];       
@@ -41,7 +44,7 @@ router.route('/')
                 docClient.scan(params, onScan);
             }
             
-            log.info(req.connection.remoteAddress + " Devices scan succeeded.");
+            log.info(ipinfo + " Devices scan succeeded.");
             res.status(200).json(retData);
         }
     }

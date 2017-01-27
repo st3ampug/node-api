@@ -21,12 +21,13 @@ var params = {
 
 router.route('/')
   .get((req, res) => {
+    var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     docClient.scan(params, onScan);
     function onScan(err, data) {
         if (err) {
             //console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
-            log.error(req.connection.remoteAddress + " Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+            log.error(ipinfo + " Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
             var retData = [];       
@@ -52,7 +53,7 @@ router.route('/')
                 docClient.scan(params, onScan);
             }
 
-            log.info(req.connection.remoteAddress + " Users scan succeeded.");
+            log.info(ipinfo + " Users scan succeeded.");
             res.status(200).json(retData);
         }
     }

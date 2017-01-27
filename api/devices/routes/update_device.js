@@ -28,15 +28,17 @@ router.route('/')
         };
         console.log(params);
 
+        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
         console.log("Updating the device...");
         docClient.update(params, function(err, data) {
             if (err) {
                 //console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
-                log.error(req.connection.remoteAddress + " Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+                log.error(ipinfo + " Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
                 //log.info("Update succeeded:", JSON.stringify(data, null, 2));
-                log.info(req.connection.remoteAddress + " Update succeeded: Device: " + params.Key.Serial + " (" + params.Key.DeviceName + ") >> " + req.body.CurrentLocation);
+                log.info(ipinfo + " Update succeeded: Device: " + params.Key.Serial + " (" + params.Key.DeviceName + ") >> " + req.body.CurrentLocation);
                 res.status(200).json(data);
             }
         });

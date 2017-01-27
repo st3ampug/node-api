@@ -15,6 +15,7 @@
     "cors": "^2.8.1",
     "dateformat": "^2.0.0",
     "express": "^4.14.0",
+    "ipware": "^1.0.0",
     "line-by-line": "^0.1.5",
     "log": "^1.4.0"
   }

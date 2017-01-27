@@ -20,13 +20,15 @@ router.route('/')
     .put((req, res) => {
         params.Item = req.body;
 
+        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
         console.log("Adding a new item...");
         docClient.put(params, function(err, data) {
             if (err) {
-                log.error(req.connection.remoteAddress + " Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
+                log.error(ipinfo + " Unable to add user. Error JSON:", JSON.stringify(err, null, 2));
                 res.status(400).json(err);
             } else {
-                log.info(req.connection.remoteAddress + " Added user: ", params.Item.Name);
+                log.info(ipinfo + " Added user: ", params.Item.Name);
                 res.status(200).json(data);
             }
         });

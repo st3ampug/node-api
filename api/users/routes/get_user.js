@@ -27,12 +27,14 @@ router.route('/:id')
       console.log("params.Name: " + params.Name);
       console.log("req.params.id: " + req.params.id);
 
+      var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
     docClient.get(params, function(err, data) {
         if (err) {
-            log.error(req.connection.remoteAddress + " Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
+            log.error(ipinfo + " Unable to read item. Error JSON:", JSON.stringify(err, null, 2));
             res.status(400).json(err);
         } else {
-            log.info(req.connection.remoteAddress + " GetItem succeeded: ", JSON.stringify(data, null, 2));
+            log.info(ipinfo + " GetItem succeeded: ", JSON.stringify(data, null, 2));
             res.json(data);
         }
     });
