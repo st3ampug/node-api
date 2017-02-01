@@ -13,6 +13,7 @@ router.route('/:date')
         var retData = [];
 
         var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+        log.info("Logging ip info: " + ipinfo);
 
         lr.on('error', function (err) {
             log.error(ipinfo + " Unable to query. Error:", JSON.stringify(err, null, 2));

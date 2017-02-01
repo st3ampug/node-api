@@ -5,8 +5,8 @@ function currentDate() {
     return dateFormat(now, "yyyy-mm-dd");
 }
 
-var fs = require('fs')
-  , Log = require('log')
-  , log = new Log('info', fs.createWriteStream('api-' + currentDate() + '.log'));
+var fs = require('fs');
+var Log = require('log');
+var log = new Log('info', fs.createWriteStream('api-' + currentDate() + '.log'));
 
 module.exports = log;
