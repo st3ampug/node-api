@@ -14,6 +14,8 @@ var docClient = new AWS.DynamoDB.DocumentClient();
 
 router.route('/')
     .post((req, res) => {
+
+        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         var params = {
             TableName: config.devicesTableName,
             Key: {
@@ -27,8 +29,6 @@ router.route('/')
             ReturnValues: "UPDATED_NEW"
         };
         console.log(params);
-
-        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
         console.log("Updating the device...");
         docClient.update(params, function(err, data) {

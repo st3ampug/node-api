@@ -17,12 +17,11 @@ var params = {
 
 router.route('/')
   .get((req, res) => {
-
+      var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     //const _serial = req.params.serial;
 
     docClient.scan(params, onScan);
     function onScan(err, data) {
-        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
         
         if (err) {
             //console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));

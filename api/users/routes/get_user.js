@@ -23,11 +23,11 @@ var params = {
 
 router.route('/:id')
   .get((req, res) => {
+        var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
       params.Name = req.params.id;
       console.log("params.Name: " + params.Name);
       console.log("req.params.id: " + req.params.id);
-
-      var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     docClient.get(params, function(err, data) {
         if (err) {
