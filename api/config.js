@@ -3,7 +3,8 @@ const config = {
     endpoint: "https://dynamodb.eu-west-1.amazonaws.com",
     devicesTableName: "WaracleDevices",
     usersTableName: "WaracleUsers",
-    logTableName: "WaracleLogs"
+    logTableName: "WaracleLogs",
+    secret: "waracle2017"
 }
 
 module.exports = config;
