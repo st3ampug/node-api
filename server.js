@@ -24,6 +24,7 @@ app.use('/api/users', require('./api/users/routes/get_users'));
 app.use('/api/users', require('./api/users/routes/put_user'));
 app.use('/api/update-user', require('./api/users/routes/update_user'));
 app.use('/api/login', require('./api/login/routes/login'));
+app.use('/api/passcheck', require('./api/login/routes/passcheck'));
 // app.use('/api/contacts', require('./api/contacts/routes/get_contacts'));
 // app.use('/api/contacts', require('./api/contacts/routes/get_contact'));
 // app.use('/api/contacts', require('./api/contacts/routes/put_contact'));

@@ -1,7 +1,3 @@
-// THIS IS NOT WORKKING, SHOULD BE REPLACED WITH THE QUERY EXAMPLE FROM:
-// http://docs.aws.amazon.com/amazondynamodb/latest/gettingstartedguide/GettingStarted.NodeJs.04.html
-// disabled in server.js
-
 const express = require('express');
 const router = express.Router();
 const config = require('../../config');
@@ -27,8 +23,8 @@ router.route('/')
     var ipinfo = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     var sentemail = req.body.Email;
 
-    console.log("sent email: " + req.body.email);
-    console.log("req.params: " + JSON.stringify(req.body));
+    console.log("sent email: " + req.body.Email);
+    console.log("req.body: " + JSON.stringify(req.body));
 
     if( typeof(req.body.Secret) !== 'undefined' && 
         typeof(req.body.Email) !== 'undefined' ){
