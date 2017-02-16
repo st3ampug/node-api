@@ -41,7 +41,8 @@ router.route('/')
                                 Email: user.Email,
                                 LoggedIn: user.LoggedIn
                             };
-                            retData = retData.concat(tmp);
+                            retData = tmp;
+                            // obviously if multiple users are returned the last one will be shown only!
                         }
                     });
 
