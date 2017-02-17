@@ -19,8 +19,9 @@ router.route('/')
         var params = {
             TableName: config.devicesTableName,
             Key: {
-                "Serial": req.body.Serial,
-                "DeviceName": req.body.DeviceName
+                "Serial": req.body.Serial
+                // ,
+                // "DeviceName": req.body.DeviceName
             },
             UpdateExpression: "set CurrentLocation = :cl",
             ExpressionAttributeValues: {
